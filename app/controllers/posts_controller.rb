@@ -4,7 +4,14 @@ class PostsController < ApplicationController
   # GET /posts
   # GET /posts.json
   def index
-    @posts = Post.all
+   
+    @post = Post.new  
+ 
+    if params[:post] && params[:post][:title]
+      @posts = Post.where("title LIKE '%#{params[:post][:title]}%'")
+    else
+      @posts = Post.all
+    end
   end
 
   # GET /posts/1
